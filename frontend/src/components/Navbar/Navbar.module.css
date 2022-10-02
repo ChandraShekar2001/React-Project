@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.nav-items {
+    border: 2px solid black;
+    margin-right: 5%;;
+}
+
+.remove-bullets {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.logo {
+    font-size: 2rem;
+    border: 2px solid black;
+}
+
+.remove-bullets > li {
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
