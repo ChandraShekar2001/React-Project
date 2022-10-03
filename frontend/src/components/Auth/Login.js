@@ -28,6 +28,7 @@ const Login = (props) => {
             setIsLoggedIn(true);
             props.onLogin(isLoggedIn, data.user)
         }
+        console.log(data);
     }
   return (
       <form onSubmit={submitHandler}>
