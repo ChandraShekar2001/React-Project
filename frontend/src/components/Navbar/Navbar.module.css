@@ -9,7 +9,8 @@
     top:0;
     width: 100%;
     z-index: 3;
-    background-color: #efefef
+    background-color: #efefef;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;    
 }
 
 li{
@@ -29,8 +30,9 @@ li{
 
 .logo{
     font-size: 2rem;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     padding-left: 2em;
+    margin-right: 0.7em;
 }
 
 .search{

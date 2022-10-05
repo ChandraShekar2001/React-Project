@@ -3,12 +3,17 @@ import classes from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState, } from "react";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const navigate = useNavigate();
-  const onClickHandler = (e) => {
-    navigate("/products");
+  const [keyword, setKeyword] = useState("");
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    navigate(`/products/${keyword}`);
   };
+
   return (
     <>
       <nav className={classes.nav}>
@@ -19,21 +24,19 @@ const Navbar = (props) => {
         </div>
 
         <div>
-          <button
-            className={classes["dropdown-content"]}
-            onClick={onClickHandler}
-          >
-            Products
-          </button>
+          <button className={classes["dropdown-content"]} onClick={e => navigate('/products')}>Products</button>
+          <button className={classes["dropdown-content"]}>Dashboard</button>
         </div>
 
         <div className={classes.search}>
-          <input
-            className={classes["search-header"]}
-            type="search"
-            name="search"
-            placeholder="Search..."
-          />
+          <form onSubmit={onSubmitHandler}>
+            <input
+              className={classes["search-header"]}
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+          </form>
         </div>
 
         <ul className={classes["nav-list"]}>
@@ -53,7 +56,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li className={classes.item}>
-            <Link>
+            <Link to ='/login'>
               <FontAwesomeIcon icon={faUser} className={classes.black} />{" "}
             </Link>
           </li>

@@ -1,0 +1,67 @@
+import React from "react";
+import Navbar from "../components/Navbar/Navbar";
+import Carousel from "react-material-ui-carousel";
+import classes from "../components/styles/Home.module.css";
+import Banner from "../components/layout/Banner";
+import Footer from "../components/layout/Footer";
+import ProductCard from "../components/layout/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/actions/product-actions";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+const images = [
+  "/images/carousel-1.jpg",
+  "/images/carousel-2.jpg",
+  "/images/carousel-3.jpg",
+  "/images/carousel-4.jpg",
+  "/images/carousel-5.jpg",
+];
+
+const Home = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const products = useSelector((state) => state.products.allProducts);
+  return (
+    <>
+      <body className={classes.body}>
+        <Navbar />
+        <Carousel>
+          {images.map((image, i) => (
+            <img
+              className={classes.images}
+              src={image}
+              key={i}
+              alt={`${i} Slide`}
+            />
+          ))}
+        </Carousel>
+
+        <div className={classes.featuredProductsSection}>
+          <h1 className={classes.featuredProductHeading}>FEATURED PRODUCTS</h1>
+          <div className={classes.line}></div>
+          <div className={classes.featuredProducts}>
+            {products.map((product) => (
+              <Link to={`/products/${product._id}`} className={classes.link}>
+                <ProductCard
+                  name={product.name}
+                  price={product.price}
+                  id={product._id}
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+        <Banner />
+        <br />
+        <br />
+        <Footer />
+      </body>
+    </>
+  );
+};
+
+export default Home;
