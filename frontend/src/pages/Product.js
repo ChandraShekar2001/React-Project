@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
-import classes from './styles/Product.module.css'
-import AllReveiws from './OldComponents.js/AllReveiws'
-import DisplayImage from './OldComponents.js/DisplayImage'
-import CarouselItem from './OldComponents.js/CarouselItem';
-import ImagesRow from './OldComponents.js/ImagesRow'
-import ProductDetailsNav from './OldComponents.js/ProductDetailsNav'
-import ProductNameDescription from './OldComponents.js/ProductNameDescription'
-import ProductSpecs from './OldComponents.js/ProductSpecs'
-import RecomendedProducts from './OldComponents.js/RecomendedProducts'
+import classes from '../components/styles/Product.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faStar, faIndianRupeeSign, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
-// import {faStar} from "@fortawesome/free-regular-svg-icons"
 import ReactStars from "react-rating-stars-component";
+import RecomendedProducts from '../components/layout/RecomendedProducts';
+import IndividualReview from '../components/layout/IndividualReview';
 
 
+
+
+
+  
+  function Product() {
+	
 const rating = {
 	size: 20,
 	count: 5,
@@ -29,12 +26,8 @@ const rating = {
 	emptyIcon: <FontAwesomeIcon icon={faStar} />,
 	halfIcon: <FontAwesomeIcon icon={faStarHalfStroke} />,
 	filledIcon: <FontAwesomeIcon icon={faStar} />,
-  };
+};
 
-
-  
-  function Product() {
-	
 	const [state1, setState1] = useState(true)
 	const [state2, setState2] = useState(false)
 	const [state3, setState3] = useState(false)
@@ -66,7 +59,7 @@ const rating = {
 	}
 
 	return (
-		<body>
+		<section>
 			<div className={`${classes["product-main-info"]} `}>
 				<div className={classes["product-row"]}>
 					<div className={`${classes['product-col-md-8']} ${classes["product-images"]}`}>
@@ -74,25 +67,25 @@ const rating = {
 						{/* ---------------------------IMages row--------------------------- */}
 						<div className={`${classes["all-product-images"]}`}>
 							<div className={classes["grid-img-box"]} onClick = {clickHandler1}>
-								<img src="./Images/realme Book.png" alt="..." className={classes["grid-img"]} />
+								<img src="./images/realme Book.png" alt="..." className={classes["grid-img"]} />
 							</div>
 							<div className={classes["grid-img-box"]} onClick = {clickHandler2}>
-								<img src="./Images/realme Band 2.png" alt="..." className={classes["grid-img"]} />
+								<img src="./images/realme Band 2.png" alt="..." className={classes["grid-img"]} />
 							</div>
 							<div className={classes["grid-img-box"]} onClick = {clickHandler3}>
-								<img src="./Images/realme Cobble Bluetooth.png" alt="..." className={classes["grid-img"]} />
+								<img src="./images/realme Cobble Bluetooth.png" alt="..." className={classes["grid-img"]} />
 							</div>
 							<div className={classes["grid-img-box"]} onClick = {clickHandler4}>
-								<img src="./Images/realme Pad.png" alt="..." className={classes["grid-img"]} />
+								<img src="./images/realme Pad.png" alt="..." className={classes["grid-img"]} />
 							</div>
 						</div>
 
 						{/* ---------------------------Display Image--------------------------- */}
 						<div className={`${classes["product-current-image"]}`}>
-							{state1 && <img src="./Images/realme Book.png" alt="..." className={`${classes["main-img"]}`} />}
-							{state2 && <img src="./Images/realme Band 2.png" alt="..." className={`${classes["main-img"]}`} />}
-							{state3 && <img src="./Images/realme Cobble Bluetooth.png" alt="..." className={`${classes["main-img"]}`} />}
-							{state4 && <img src="./Images/realme Pad.png" alt="..." className={`${classes["main-img"]}`} />}
+							{state1 && <img src="./images/realme Book.png" alt="..." className={`${classes["main-img"]}`} />}
+							{state2 && <img src="./images/realme Band 2.png" alt="..." className={`${classes["main-img"]}`} />}
+							{state3 && <img src="./images/realme Cobble Bluetooth.png" alt="..." className={`${classes["main-img"]}`} />}
+							{state4 && <img src="./images/realme Pad.png" alt="..." className={`${classes["main-img"]}`} />}
 						</div>
 					</div>
 
@@ -145,120 +138,7 @@ const rating = {
 				</div>
 				<div className={`${classes["background-1"]}`}>
 					{/*---------------------------------------------- <RecomendedProducts />----------------------Carousel-------------- */}
-					<Carousel autoPlay infiniteLoop interval={5000}>
-						{/* -------------------------Carousel Slide------------------------- */}
-						<div className={`${classes['row']} ${classes["slide-1"]}`}>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><FontAwesomeIcon icon={faIndianRupeeSign} style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }} />
-										500 Off
-									</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<FontAwesomeIcon icon={faIndianRupeeSign} style={{ fontSize: '1rem', margin: '0 auto' }} />
-										13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						{/* -------------------------Carousel Slide------------------------- */}
-						<div className={`${classes['row']} ${classes["slide-2"]}`}>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-							{/*---------------------------- <CarouselItem /> ---------------------------------*/}
-							<div className={`${classes["deal-1"]} ${classes['slide-col-3']}`}>
-								<div className={classes["card"]}>
-									<div className={classes["offer"]}><i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-										style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }}></i>500 Off</div>
-									<img src="./Images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
-									<div className={classes["card-body"]}>
-										<p className={classes["card-text"]}><strong>realme Pad</strong></p>
-										<p className={classes["card-text"]}>From,<i className={`${classes["fa-indian-rupee-sign"]} ${classes['fa-solid']}`}
-											style={{ fontSize: '1rem', margin: '0 auto' }}></i>13,999</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						{/* -------------------------Carousel Slide------------------------- */}
-					</Carousel>
+					<RecomendedProducts/>
 				</div>
 			</div>
 
@@ -274,7 +154,7 @@ const rating = {
 						</p>
 						<ReactStars {...rating} />
 						<p>
-							3.0
+							{rating.value}
 						</p>
 					</div>
 				</div>
@@ -336,54 +216,10 @@ const rating = {
 						Reviews
 					</div>
 					{/* -------------------------------<IndividualReview />---------------------------- */}
-					<div className={classes["individual-review"]}>
-						<div className={classes["individual-review-box"]}>
-							<div className={`${classes['row']} ${classes["user-id-rating"]}`}>
-								<div className={`${classes['col-md-1']} ${classes["user-dp"]}`}>
-									<img src="./Images/Dp-for-reviews.jpeg" alt="..." />
-								</div>
-								<div className={`${classes['col-3']} ${classes["user-name-review-time"]}`}>
-									<div className={classes["user-name"]}>
-										User name
-									</div>
-									<div className={classes["review-time"]}>
-										date time
-									</div>
-								</div>
-								<div className={`${classes['col-md-8']} ${classes["user-rating"]}`}>
-									<ReactStars {...rating} />
-								</div>
-							</div>
-							<div className={`${classes['row']} ${classes["user-images"]}`}>
-								<div className={classes["image"]}>
-									<img src="./Images/realme Cobble Bluetooth.png" alt="" />
-								</div>
-
-								<div className={classes["image"]}>
-									<img src="./Images/realme Cobble Bluetooth.png" alt="" />
-								</div>
-
-								<div className={classes["image"]}>
-									<img src="./Images/realme Cobble Bluetooth.png" alt="" />
-								</div>
-
-								<div className={classes["image"]}>
-									<img src="./Images/realme Cobble Bluetooth.png" alt="" />
-								</div>
-							</div>
-							<div className={`${classes['row']} ${classes["user-review"]}`}>
-								<div className={classes["user-review-txt"]}>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, error?
-								</div>
-								<div className={classes["like-review"]}>
-
-								</div>
-							</div>
-						</div>
-					</div>
+					<IndividualReview/>
 				</div>
 			</div>
-		</body>
+		</section>
 	)
 }
 
