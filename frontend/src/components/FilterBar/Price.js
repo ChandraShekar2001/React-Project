@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import '../styles/FilterExtra.css'
 const Price = (props) => {
   const onClick1Handler = e => {

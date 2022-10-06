@@ -8,7 +8,7 @@
     position: fixed;
     top:0;
     width: 100%;
-    z-index: 3;
+    z-index: 2;
     background-color: #efefef;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;    
 }
@@ -147,4 +147,23 @@ li{
 
 .font-poppin{
     font-family: 'Poppins', sans-serif;
+}
+
+.toggleBox li {
+    display: block;
+}
+
+.toggleBox{
+    height: 230px;
+    width: 200px;
+    position: fixed;
+    top: 11%;
+    z-index: 5;
+    background-color: white;
+    border-radius: 5px;
+    left: 86%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

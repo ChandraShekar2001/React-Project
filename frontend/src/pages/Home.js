@@ -45,8 +45,13 @@ const Home = (props) => {
           <div className={classes.line}></div>
           <div className={classes.featuredProducts}>
             {products.map((product) => (
-              <Link to={`/products/${product._id}`} className={classes.link}>
+              <Link
+                key={product._id}
+                to={`/products/${product._id}`}
+                className={classes.link}
+              >
                 <ProductCard
+                  key={product._id}
                   name={product.name}
                   price={product.price}
                   id={product._id}

@@ -1,20 +1,71 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import classes from "../styles/SignUp.module.css";
 import Navbar from "../Navbar/Navbar";
+import { register, clearErrors } from "../../store/actions/user-actions";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const pwdRef = useRef();
+  const confirmPwd = useRef();
+  
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = pwdRef.current.value;
+    const confirmPassword = confirmPwd.current.value;
+
+    if (!name || !email || !password || !confirmPassword) {
+      return alert.error("Please fill all required fields");
+    }
+    if (confirmPassword !== password) {
+      return alert.error("Password and Confirm password do not match");
+    }
+
+    dispatch(register({ name, email, password }))
+      .then(() => {
+        alert.info("Account created successfully")
+        navigate('/account')
+    })
+  };
+
+  const message = useSelector(state => state.user.message)
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+
+  useEffect(() => {
+    if (message) {
+      alert.error(message)
+    }
+    if (isAuthenticated) {
+      dispatch(clearErrors())
+      navigate('/account')
+    }
+    
+  }, [alert, message, navigate, isAuthenticated, dispatch]);
+
+
   return (
     <>
       <Navbar />
       <div className={classes.complete}>
         <div className={classes["complete-form"]}>
           <h4 style={{ textAlign: "center", marginTop: "10px" }}>SIGN UP</h4>
-          <form className={classes.singUpForm}>
+          <form className={classes.singUpForm} onSubmit={onSubmitHandler}>
             <div className={classes.formInputs}>
               <input
                 type="text"
                 name="username"
                 placeholder="Username"
+                ref={nameRef}
                 className={classes.input}
               />
             </div>
@@ -23,6 +74,7 @@ const SignUp = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
+                ref={emailRef}
                 className={classes.input}
               />
             </div>
@@ -30,6 +82,7 @@ const SignUp = () => {
               <input
                 type="password"
                 name="password"
+                ref={pwdRef}
                 placeholder="Password"
                 className={classes.input}
               />
@@ -40,6 +93,7 @@ const SignUp = () => {
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
+                ref={confirmPwd}
                 className={classes.input}
               />
             </div>
