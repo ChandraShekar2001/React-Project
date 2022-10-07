@@ -8,8 +8,10 @@ import Products from "../src/pages/Products";
 import Auth from "../src/pages/Auth";
 import Profile from "../src/pages/Profile";
 import UpdateProfile from "../src/pages/UpdateProfile";
-import UpdatePassword from "../src/pages/UpdatePassword"
-
+import UpdatePassword from "../src/pages/UpdatePassword";
+import ForgotPassword from "../src/pages/ForgotPassword";
+import ResetPassword from "../src/pages/ResetPassword";
+import Product from "../src/pages/Product"
 
 import { loadUser } from "../src/store/actions/user-actions";
 
@@ -28,6 +30,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
+        <Route exact path="/product/:id" element={<Product />} />
         <Route
           exact
           path="/account"
@@ -36,14 +39,23 @@ function App() {
         <Route
           exact
           path="/me/update"
-          element={isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />
+          }
         />
         <Route
-        exact
-        path="/password/update"
-        element={isAuthenticated ? <UpdatePassword /> : <Navigate to="/login" />}
-      />
-
+          exact
+          path="/password/update"
+          element={
+            isAuthenticated ? <UpdatePassword /> : <Navigate to="/login" />
+          }
+        />
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route
+          exact
+          path="/password/reset/:token"
+          element={<ResetPassword />}
+        />
         <Route exact path="/login" element={<Auth />} />
       </Routes>
     </>

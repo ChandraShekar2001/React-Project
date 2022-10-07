@@ -24,7 +24,7 @@ function IndividualReview() {
             <div className={classes["individual-review-box"]}>
                 <div className={`${classes['row']} ${classes["user-id-rating"]}`}>
                     <div className={`${classes['col-md-1']} ${classes["user-dp"]}`}>
-                        <img src="./images/Dp-for-reviews.jpeg" alt="..." />
+                        <img src="/images/Dp-for-reviews.jpeg" alt="..." />
                     </div>
                     <div className={`${classes['col-3']} ${classes["user-name-review-time"]}`}>
                         <div className={classes["user-name"]}>
@@ -40,19 +40,19 @@ function IndividualReview() {
                 </div>
                 <div className={`${classes['row']} ${classes["user-images"]}`}>
                     <div className={classes["image"]}>
-                        <img src="./images/realme Cobble Bluetooth.png" alt="" />
+                        <img src="/images/realme Cobble Bluetooth.png" alt="" />
                     </div>
 
                     <div className={classes["image"]}>
-                        <img src="./images/realme Cobble Bluetooth.png" alt="" />
+                        <img src="/images/realme Cobble Bluetooth.png" alt="" />
                     </div>
 
                     <div className={classes["image"]}>
-                        <img src="./images/realme Cobble Bluetooth.png" alt="" />
+                        <img src="/images/realme Cobble Bluetooth.png" alt="" />
                     </div>
 
                     <div className={classes["image"]}>
-                        <img src="./images/realme Cobble Bluetooth.png" alt="" />
+                        <img src="/images/realme Cobble Bluetooth.png" alt="" />
                     </div>
                 </div>
                 <div className={`${classes['row']} ${classes["user-review"]}`}>

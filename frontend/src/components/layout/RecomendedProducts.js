@@ -6,7 +6,7 @@ import classes from '../styles/Product.module.css'
 
 function RecomendedProducts() {
     return (
-        <Carousel autoPlay infiniteLoop interval={1000}>
+        <Carousel autoPlay infiniteLoop interval={1000} showThumbs={false}>
             <div className={`${classes['row']} ${classes["slide-1"]}`}>
                 <CarouselItem/>
                 <CarouselItem/>

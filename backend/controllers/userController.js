@@ -69,7 +69,6 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 // Forgot Password
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
-
   if (!user) {
     return next(new ErrorHander("User not found", 404));
   }
@@ -79,9 +78,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${req.protocol}://localhost:3000/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
@@ -118,7 +115,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
   });
-
   if (!user) {
     return next(
       new ErrorHander(

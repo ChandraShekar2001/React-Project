@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../store/actions/user-actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -82,10 +82,12 @@ const Login = (props) => {
                 className={classes.input}
               />
             </div>
+            <Link to = '/password/forgot'>Forgot Password?</Link>
             <button className={classes.Btn}>Submit</button>
             <button className={classes.Btn} onClick={showSignUpHandler}>
               Sign Up
             </button>
+
           </form>
         </div>
       </div>

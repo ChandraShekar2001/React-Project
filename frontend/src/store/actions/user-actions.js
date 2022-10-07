@@ -1,4 +1,6 @@
 import { UserActions } from "../index";
+import {ProfileActions } from "../index"
+import {forgotPasswordActions } from "../index"
 
 export const login = (email, password) => async (dispatch) => {
   const sendRequest = async () => {
@@ -118,7 +120,6 @@ export const updateProfile = (name, email) => async (dispatch) => {
 
 export const updatePassword = (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
   const token = localStorage.getItem('token')
-  dispatch(UserActions.setisUpdate())
   const sendUpdateRequest = async () => {
     let url = "http://localhost:4000/api/v1/password/update";
     const response = await fetch(url, {
@@ -140,10 +141,63 @@ export const updatePassword = (oldPassword, newPassword, confirmPassword) => asy
   
   const data = await sendUpdateRequest();
   console.log(data);
-  if(!data.success)
-    dispatch(UserActions.updatePwd(data));
-  else dispatch(UserActions.setUserUpdate())
+  if (data.success)
+    dispatch(ProfileActions.updatePasswordSuccess());
+  else dispatch(ProfileActions.updatePasswordFailed(data));
 };
+
+
+export const forgotPassword = (email) => async (dispatch) => {
+  const token = localStorage.getItem('token')
+  const sendUpdateRequest = async () => {
+    let url = "http://localhost:4000/api/v1/password/forgot";
+    const response = await fetch(url, {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        token,
+      },
+      body: JSON.stringify({
+        email
+      }),
+    });
+    const data = await response.json();
+    return data;
+  };
+  
+  const data = await sendUpdateRequest();
+  console.log(data);
+  if (data.success)
+    dispatch(forgotPasswordActions.forgotPasswordSuccess(data));
+  else dispatch(forgotPasswordActions.forgotPasswordFail(data.message));
+};
+
+export const resetPassword = (token, passwords) => async (dispatch) => {
+  const sendUpdateRequest = async () => {
+    let url = `http://localhost:4000/api/v1/password/reset/${token}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: passwords.password,
+        confirmPassword: passwords.confirmPassword
+      }),
+    });
+    const data = await response.json();
+    return data;
+  };
+  
+  const data = await sendUpdateRequest();
+  console.log(data);
+  if (data.success)
+    dispatch(forgotPasswordActions.forgotPasswordSuccess(data));
+  else dispatch(forgotPasswordActions.forgotPasswordFail(data.message));
+};
+
 
 
 

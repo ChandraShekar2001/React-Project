@@ -58,7 +58,7 @@ const Product = () => {
                 <div className="productinfo_div">
                   <div className="pro_info">
                     <div className="pro_name">
-                      <Link className="heading" to={`/products/${product._id}`}>
+                      <Link className="heading" to={`/product/${product._id}`}>
                         {product.name}
                       </Link>
                     </div>

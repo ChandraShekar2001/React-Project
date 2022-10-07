@@ -5,7 +5,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updatePassword } from "../store/actions/user-actions";
-import { UserActions } from "../store/index";
+import { ProfileActions } from "../store/index";
 
 const UpdatePassword = () => {
   const alert = useAlert();
@@ -20,10 +20,11 @@ const UpdatePassword = () => {
   const [newPassword, setnewPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
 
-  const { isUpdated, updateMessage } = useSelector((state) => state.user);
-  console.log(isUpdated, updateMessage);
+  //   const { isUpdated, updateMessage } = useSelector((state) => state.user);
+  //   console.log(isUpdated, updateMessage);
 
-    
+  const { isUpdated, error } = useSelector((state) => state.profile);
+  console.log(isUpdated, error);
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const oldPassword = oldPasswordRef.current.value;
@@ -41,22 +42,20 @@ const UpdatePassword = () => {
     setnewPassword("");
     setconfirmPassword("");
     dispatch(updatePassword(oldPassword, newPassword, confirmPassword));
-
-
   };
 
   useEffect(() => {
-      if (updateMessage) {
-        alert.error(updateMessage);
-        dispatch(UserActions.clearError())
-      }
-      if (isUpdated) {
-        alert.success("Password updated successfully");
-        dispatch(UserActions.stateReset())
-        navigate("/account");
-      }
-}, [isUpdated, updateMessage, dispatch, alert, navigate]);
-    
+    if (error) {
+      alert.error(error);
+      dispatch(ProfileActions.updatePasswordReset());
+    }
+    if (isUpdated) {
+      alert.success("Password updated successfully");
+      dispatch(ProfileActions.updatePasswordReset());
+      navigate("/account");
+    }
+  }, [isUpdated, error, dispatch, alert, navigate]);
+
   return (
     <>
       <Navbar />

@@ -11,7 +11,7 @@ function CarouselItem() {
                 <div className={classes["offer"]}><FontAwesomeIcon icon={faIndianRupeeSign} style={{ fontSize: '0.8rem', margin: '0 auto', color: "#efefef" }} />
                     500 Off
                 </div>
-                <img src="./images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
+                <img src="/images/realme Pad.png" className={classes["card-img-top"]} alt="..." />
                 <div className={classes["card-body"]}>
                     <p className={classes["card-text"]}><strong>realme Pad</strong></p>
                     <p className={classes["card-text"]}>From,<FontAwesomeIcon icon={faIndianRupeeSign} style={{ fontSize: '1rem', margin: '0 auto' }} />
