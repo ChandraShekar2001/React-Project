@@ -3,10 +3,13 @@ import classes from "../components/styles/Product.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useAlert} from 'react-alert'
 import {
   faStar,
   faIndianRupeeSign,
   faStarHalfStroke,
+  faPlus,
+  faMinus
 } from "@fortawesome/free-solid-svg-icons";
 import ReactStars from "react-rating-stars-component";
 import RecomendedProducts from "../components/layout/RecomendedProducts";
@@ -14,26 +17,39 @@ import IndividualReview from "../components/layout/IndividualReview";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSingleProduct } from "../store/actions/product-actions";
-import { SingleProductSliceActions } from "../store/index";
+import { singleProductSliceActions } from "../store/index";
+import {addItem} from '../store/actions/cart-actions'
+import Navbar from "../components/Navbar/Navbar";
+
+import {newReview} from '../store/actions/product-actions'
+import {newReviewActions} from '../store/index'
 
 function Product() {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
 
-  const { singleProduct, error, success } = useSelector(
-    (state) => state.getProduct
+  const { product, error,loading } = useSelector(
+    (state) => state.singleProduct
   );
+
+  const {success, error:reviewError} = useSelector(state =>state.newReview)
 
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(SingleProductSliceActions.setsSingleProductReset());
+      dispatch(singleProductSliceActions.setsproductReset());
+    }
+    if (success) { 
+      newReviewActions.newReviewReset()
+    }
+    if (reviewError) {
+      newReviewActions.newReviewReset()
     }
     dispatch(fetchSingleProduct(id));
-  }, [dispatch, id, error]);
+  }, [dispatch, id, error, alert, success, reviewError]);
 
-  console.log(success);
 
   const rating = {
     size: 20,
@@ -52,6 +68,9 @@ function Product() {
   const [state2, setState2] = useState(false);
   const [state3, setState3] = useState(false);
   const [state4, setState4] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [Rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
   const clickHandler1 = () => {
     setState1(true);
@@ -78,9 +97,43 @@ function Product() {
     setState4(true);
   };
 
+  const increaseQuantity = () => {
+    if (quantity >= product.Stock)
+      return;
+    const q = quantity + 1;
+    setQuantity(q);
+  }
+
+  const decreaseQuantity = () => {
+    if (quantity === 0)
+      return;
+    const q = quantity - 1;
+    setQuantity(q);
+  }
+
+  const addItemToCartHandler = () => {
+    dispatch(addItem(id, quantity));
+    alert.success("Item added to cart successfully")
+  }
+
+
+  const onReviewFormSubmitHandler = e => { 
+    e.preventDefault();
+    const reviewData = {
+      rating: Rating,
+      comment,
+      productId: params.id
+    }
+
+    dispatch(newReview(reviewData))
+  }
+
+
   return (
     <>
-      {success &&<section>
+      <Navbar />
+
+      {loading ?<p>Loading...</p>:<section className={classes.black}>
         <div className={`${classes["product-main-info"]} `}>
           <div className={classes["product-row"]}>
             <div
@@ -167,7 +220,7 @@ function Product() {
               <div
                 className={`${classes["product-details"]} ${classes["font-poppin"]}`}
               >
-                <div className={classes["product-name"]}>{ singleProduct.name}</div>
+                <div className={classes["product-name"]}>{ product.name}</div>
               </div>
 
               <div
@@ -179,7 +232,7 @@ function Product() {
                       icon={faIndianRupeeSign}
                       style={{ fontSize: "1.3rem", margin: "0 auto" }}
                     />
-                    { singleProduct.price}
+                    { product.price}
                   </div>
                 </div>
                 <div className={classes["product-rating"]}>
@@ -191,16 +244,28 @@ function Product() {
               <div
                 className={`${classes["product-description"]} ${classes["font-poppin"]}`}
               >
+                Description : 
+                <p>
                 MediaTek Helio G85 Octa-core Processor <br />
                 4 GB RAM | 128 GB ROM | Expandable Upto 256 GB <br />
                 16.51 cm (6.5 inch) HD+ Display <br />
                 50MP+2MP+2MP Primary Camera | 8MP Front Camera <br />
                 6000 mAh Battery <br />
+                </p>
+              </div>
+
+              <div className={classes['product-status']}>
+                Status : In Stock
+              </div>
+
+              <div className={classes['product-quantity']}>
+                Quantity: 
+                <div className={classes['product-input']}><FontAwesomeIcon icon={faMinus} className={classes.Icon} onClick={ decreaseQuantity} /><input readOnly type='text' value={ quantity} /><FontAwesomeIcon icon={ faPlus} className={ classes.Icon}   onClick={ increaseQuantity}/></div>
               </div>
 
               <div className={classes["product-purchase"]}>
                 <div className={`${classes["add-cart"]}`}>
-                  <Button variant="outline-warning">Add to Cart</Button>
+                  <Button variant="outline-warning" onClick={ addItemToCartHandler}>Add to Cart</Button>
                 </div>
                 <div
                   className={`${classes["buy-now"]} ${classes["btn-outline-primary"]}`}
@@ -312,6 +377,14 @@ function Product() {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <form onSubmit = {onReviewFormSubmitHandler}>
+              <input type="text" value={ Rating} onChange={e=>setRating(e.target.value)} />
+              <input type="text" value={ comment} onChange={e=>setComment(e.target.value)} />
+              <button onClick={e => { setRating(''); setComment('')}}>Cancel</button>
+              <button>Submit</button>
+            </form>
           </div>
           <div className={`${classes["product-reviews-all"]}`}>
             <div className={classes["main-heading"]}>Reviews</div>

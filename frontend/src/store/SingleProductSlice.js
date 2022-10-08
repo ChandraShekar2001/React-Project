@@ -1,20 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const SingleProductsSlice = createSlice({
-  name: "getProduct",
+const singleProductsSlice = createSlice({
+  name: "singleProduct",
   initialState: {
+    loading:true,
     error: null,
-    singleProduct: null,
-    success: false,
+    product: [],
   },
   reducers: {
+    singleProductRequest(state) {
+      state.loading = true;
+    },
     setSingleProductSuccess(state, action) {
-      state.error = null
-      state.success = true;
-      state.singleProduct = action.payload.product;
+      state.loading = false;
+      state.product = action.payload;
     },
     setSingleProductFail(state, action) {
-      state.error = action.payload.message;
+      state.loading = false;
+      state.error = action.payload;
     },
     setsSingleProductReset(state) {
         state.error = null;
@@ -22,4 +25,4 @@ const SingleProductsSlice = createSlice({
   },
 });
 
-export default SingleProductsSlice;
+export default singleProductsSlice;

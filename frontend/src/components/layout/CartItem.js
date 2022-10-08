@@ -1,33 +1,75 @@
-import React, { useState } from 'react'
-import classes from '../styles/Cart.module.css'
+import React from "react";
+import classes from "../styles/Cart.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
-import Button from 'react-bootstrap/Button';
+import {
+  faIndianRupeeSign,
+  faPlus,
+  faMinus,
+} from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
+import {
+  addItem,
+  removeItem,
+  removeCompleteCartItem,
+} from "../../store/actions/cart-actions";
 
-function CartItem({state, valueHandler}) {
+function CartItem({ product }) {
 
-    let defaultPrice = 1500
-    const [data, setData] = useState({price: defaultPrice, quantity: 1})
+  const dispatch = useDispatch();
 
-    return (
-        <div className={classes.card}>
-            <div  className={`${classes['image']}`}>
-                <img src="./images/realme Band 2.png" alt="..." />
-            </div>
-            <div className={`${classes['name']}`}>
-                Realme Band 2
-            </div>
-            <div className={`${classes['price']}`}>
-                <div><FontAwesomeIcon icon={faIndianRupeeSign} />{data.price}</div>
-            </div>
-            <div className={`${classes['quantity']}`}>
-                <input type='number' value={data.quantity} min='1' onChange={(e) => setData({quantity: e.target.value, price: defaultPrice*e.target.value})}/>
-            </div>
-            <div className={`${classes['remove']}`}>
-                <Button variant="outline-danger" className={classes.black}>Remove</Button>
-            </div>
+  const increaseQuantity = (id, quantity) => {
+    const newQty = quantity + 1;
+    console.log(newQty);
+    dispatch(addItem(id, 1));
+  };
+
+  const decreaseQuantity = (id) => {
+    dispatch(removeItem(id));
+  };
+
+  const removeItemFromCart = (id) => {
+    dispatch(removeCompleteCartItem(id));
+  };
+
+  return (
+    <div className={classes.card}>
+      <div className={`${classes["image"]}`}>
+        <img src="./images/realme Band 2.png" alt="..." />
+      </div>
+      <div className={`${classes["name"]}`}>{product.name}</div>
+      <div className={`${classes["price"]}`}>
+        <div>
+          <FontAwesomeIcon icon={faIndianRupeeSign} />
+          {product.price}
         </div>
-    )
+      </div>
+      <div className={`${classes["quantity"]}`}>
+        <div className={classes["quantity-input"]}>
+          <FontAwesomeIcon
+            icon={faMinus}
+            className={classes.Icon}
+            onClick={() => decreaseQuantity(product.id)}
+          />
+          <input readOnly type="text" value={product.quantity} />
+          <FontAwesomeIcon
+            icon={faPlus}
+            className={classes.Icon}
+            onClick={() => increaseQuantity(product.id, product.quantity)}
+          />
+        </div>
+      </div>
+      <div className={`${classes["remove"]}`}>
+        <Button
+          variant="outline-danger"
+          className={classes.black}
+          onClick={() => removeItemFromCart(product.id)}
+        >
+          Remove
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-export default CartItem
+export default CartItem;

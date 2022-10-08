@@ -13,10 +13,8 @@ const Product = () => {
   const params = useParams();
   const keyword = params.keyword;
 
-  const products = useSelector((state) => state.products.allProducts);
+  const {loading, products, resultPerPage, productsCount} = useSelector((state) => state.allProducts);
 
-  const resultPerPage = useSelector((state) => state.products.resultPerPage);
-  const productsCount = useSelector((state) => state.products.productsCount);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 30000]);
@@ -37,7 +35,7 @@ const Product = () => {
     <>
       <Navbar />
 
-      <div className="App body">
+      {loading?<p style = {{color:'black'}}>Loading...</p>:<div className="App body">
         <Filter
           onPrice={setPriceHandler}
           onCategory={setCategoryHandler}
@@ -126,7 +124,7 @@ const Product = () => {
             </div>
           )}
         </div>
-      </div>
+      </div>}
     </>
   );
 };

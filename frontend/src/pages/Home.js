@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
 import Carousel from "react-material-ui-carousel";
 import classes from "../components/styles/Home.module.css";
 import Banner from "../components/layout/Banner";
@@ -24,11 +23,10 @@ const Home = (props) => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const products = useSelector((state) => state.products.allProducts);
+  const {products} = useSelector((state) => state.allProducts);
   return (
     <>
       <body className={classes.body}>
-        <Navbar />
         <Carousel>
           {images.map((image, i) => (
             <img

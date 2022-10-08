@@ -3,8 +3,10 @@ import classes from "../styles/Login.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { login, clearErrors } from "../../store/actions/user-actions";
+import { login } from "../../store/actions/user-actions";
 import { useNavigate, Link } from "react-router-dom";
+
+import { UserActions } from "../../store/index";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -18,8 +20,8 @@ const Login = (props) => {
   const alert = useAlert();
   const emailRef = useRef();
   const pwdRef = useRef();
-  const [Email, setEmail] = useState('');
-  const [Pwd, setPwd] = useState('');
+  const [Email, setEmail] = useState("");
+  const [Pwd, setPwd] = useState("");
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -29,28 +31,27 @@ const Login = (props) => {
     if (!email || !password) {
       return alert.error("Please fill all the required fields!");
     }
-    setEmail('')
-    setPwd('')
-    dispatch(login(email, password)).then(()=>alert.success("Login successful!"));
+    setEmail("");
+    setPwd("");
+    dispatch(login(email, password));
   };
 
-
-  const message = useSelector((state) => state.user.message);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  
+  const error = useSelector((state) => state.user.error);
 
+  let redirect;
+  // eslint-disable-next-line no-restricted-globals
+  redirect = location.search ? location.search.split("=")[1] : "account";
 
   useEffect(() => {
-
-    if (message) {
-      alert.error(message);
+    if (error) {
+      alert.error(error);
+      dispatch(UserActions.clearError());
     }
     if (isAuthenticated) {
-      
-      dispatch(clearErrors());
-      navigate("/account");
+      navigate("/" + redirect);
     }
-  }, [alert, message, navigate, isAuthenticated, dispatch]);
+  }, [alert, error, navigate, isAuthenticated, dispatch, redirect]);
 
   return (
     <>
@@ -67,7 +68,7 @@ const Login = (props) => {
                 placeholder="Email"
                 ref={emailRef}
                 value={Email}
-                onChange={e=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className={classes.input}
               />
             </div>
@@ -78,16 +79,15 @@ const Login = (props) => {
                 placeholder="Password"
                 ref={pwdRef}
                 value={Pwd}
-                onChange={e=>setPwd(e.target.value)}
+                onChange={(e) => setPwd(e.target.value)}
                 className={classes.input}
               />
             </div>
-            <Link to = '/password/forgot'>Forgot Password?</Link>
+            <Link to="/password/forgot">Forgot Password?</Link>
             <button className={classes.Btn}>Submit</button>
             <button className={classes.Btn} onClick={showSignUpHandler}>
               Sign Up
             </button>
-
           </form>
         </div>
       </div>

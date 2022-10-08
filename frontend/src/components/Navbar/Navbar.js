@@ -20,7 +20,7 @@ const Navbar = () => {
   };
   const [keyword, setKeyword] = useState("");
   const [isProfileTouched, setisProfileTouched] = useState(false);
-
+  // console.log(isProfileTouched);
   const onSubmitHandler = (e) => {
     e.preventDefault();
     navigate(`/products/${keyword}`);
@@ -44,7 +44,7 @@ const Navbar = () => {
           </button>
           {localStorage.getItem("role") &&
             localStorage.getItem("role") === "admin" && (
-              <button className={classes["dropdown-content"]}>Dashboard</button>
+              <button className={classes["dropdown-content"]} ><Link style={{margin: '0', padding: '0'}} to='admin/dashboard'>Dashboard</Link></button>
             )}
         </div>
 
@@ -71,7 +71,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className={classes.item}>
-            <Link>
+            <Link to = '/cart'>
               <FontAwesomeIcon icon={faCartPlus} className={classes.black} />{" "}
             </Link>
           </li>

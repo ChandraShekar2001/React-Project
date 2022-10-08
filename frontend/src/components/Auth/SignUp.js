@@ -1,11 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import classes from "../styles/SignUp.module.css";
 import Navbar from "../Navbar/Navbar";
-import { register, clearErrors } from "../../store/actions/user-actions";
+import { register } from "../../store/actions/user-actions";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import {UserActions} from '../../store/index'
 
 const SignUp = () => {
   const nameRef = useRef();
@@ -32,25 +33,21 @@ const SignUp = () => {
     }
 
     dispatch(register({ name, email, password }))
-      .then(() => {
-        alert.info("Account created successfully")
-        navigate('/account')
-    })
   };
 
-  const message = useSelector(state => state.user.message)
+  const error = useSelector(state => state.user.error)
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 
   useEffect(() => {
-    if (message) {
-      alert.error(message)
+    if (error) {
+      alert.error(error)
     }
     if (isAuthenticated) {
-      dispatch(clearErrors())
+      dispatch(UserActions.clearError())
       navigate('/account')
     }
     
-  }, [alert, message, navigate, isAuthenticated, dispatch]);
+  }, [alert, error, navigate, isAuthenticated, dispatch]);
 
 
   return (
