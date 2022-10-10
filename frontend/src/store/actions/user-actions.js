@@ -8,27 +8,25 @@ import {
 } from "../index";
 
 export const login = (email, password) => async (dispatch) => {
-  try {
-    dispatch(UserActions.loginRequest());
+  dispatch(UserActions.loginRequest());
 
-    const response = await fetch(`http://localhost:4000/api/v1/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    if (data.success) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.user.role);
-      localStorage.setItem("name", data.user.name);
-      localStorage.setItem("email", data.user.email);
-      localStorage.setItem("createdAt", data.user.createdAt);
-      dispatch(UserActions.setUser(data));
-    }
-    dispatch(UserActions.loginSuccess(data.user));
-  } catch (error) {
-    dispatch(UserActions.loginFail(error.response.data.message));
+  const response = await fetch(`http://localhost:4000/api/v1/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+  if (data.success) {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", data.user.role);
+    localStorage.setItem("name", data.user.name);
+    localStorage.setItem("email", data.user.email);
+    localStorage.setItem("createdAt", data.user.createdAt);
+    dispatch(UserActions.setUser(data));
   }
+  console.log(data);
+  if (data.success) dispatch(UserActions.loginSuccess(data.user));
+  else dispatch(UserActions.loginFail(data.message));
 };
 
 export const register = (userData) => async (dispatch) => {
@@ -78,7 +76,8 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem("name");
   localStorage.removeItem("email");
   localStorage.removeItem("createdAt");
-  dispatch(UserActions.logOutUser(data));
+  if (data.success) dispatch(UserActions.logoutSuccess());
+  else dispatch(UserActions.logoutFail(data.message));
 };
 
 export const updateProfile = (name, email) => async (dispatch) => {
@@ -199,7 +198,7 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
 export const updateUser = (id, userData) => async (dispatch) => {
   try {
@@ -209,11 +208,11 @@ export const updateUser = (id, userData) => async (dispatch) => {
       `http://localhost:4000/api/v1/admin/user/${id}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" , token},
-        body: JSON.stringify(userData)
+        headers: { "Content-Type": "application/json", token },
+        body: JSON.stringify(userData),
       }
     );
-      const data = await response.json();
+    const data = await response.json();
     dispatch(updateUserActions.updateUserSuccess(data.success));
   } catch (error) {
     dispatch(updateUserActions.updateUserFail(error.response.data.message));
@@ -224,12 +223,16 @@ export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch(deleteUserActions.deleteUserRequest());
 
-    const response = await fetch(`http://localhost:4000/api/v1/admin/user/${id}`, {
-      method: 'DELETE',
-      headers: { 
-        "Content-Type": "application/json", token
+    const response = await fetch(
+      `http://localhost:4000/api/v1/admin/user/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          token,
+        },
       }
-    });
+    );
     const data = await response.json();
     dispatch(deleteUserActions.deleteUserSuccess(data));
   } catch (error) {

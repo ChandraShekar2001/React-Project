@@ -45,7 +45,7 @@ const Home = (props) => {
             {products.map((product) => (
               <Link
                 key={product._id}
-                to={`/products/${product._id}`}
+                to={`/product/${product._id}`}
                 className={classes.link}
               >
                 <ProductCard

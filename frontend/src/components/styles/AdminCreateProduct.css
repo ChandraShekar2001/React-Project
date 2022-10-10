@@ -3,7 +3,7 @@
 
 .completeForm {
     position: absolute;
-    top: 7%;
+    top: 4%;
     left: 44%;
 }
 
@@ -12,8 +12,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 600px;
-    width: 400px;
+    height: 600%;
+    width: 150%;
     border: 1px solid #e6e6e6;
     padding: 2em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -26,14 +26,14 @@
     display: inline-block;
     padding: 0.5em;
     border-radius: 4px;
-    height: 25px;
-    width: 350px;
+    /* height: 2%; */
+    width: 96%;
     border: 1px solid gray;
 }
 
 .selectOption {
-    height: 40px;
-    width: 370px;
+    /* height:40px; */
+    width: 96%;
     border-radius: 4px;
     color: gray;
 }
@@ -51,14 +51,14 @@
 
 .createButton{
     display: block;
-    width: 370px;
+    width:90%;
     border: 1px solid gray;
-    margin: 1em 0;
+    /* margin: 1em 0; */
     border-radius: 4px;
     height: 40px;
     background-color: rgb(73, 73, 73);
     color: white;
-    margin: 40px 0px 5px 15px;
+    margin: 5%;
 }
 
 .createButton:hover {

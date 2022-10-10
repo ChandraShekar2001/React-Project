@@ -16,16 +16,15 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import {Outlet} from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 const AdminSideBar = ({ children }) => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.FormShow.show);
 
   const onToggleHangler = () => {
-     dispatch(showAction.toggleShow())
+    dispatch(showAction.toggleShow());
   };
-
 
   const menuItem = [
     {
@@ -61,31 +60,34 @@ const AdminSideBar = ({ children }) => {
   ];
   return (
     <>
-    <div className="container">
-    <div style={{ width: show ? "28%" : "7%" }} className="sidebar">
-      <div className="top_section">
-        {show && <h1 className="logo">Admin Dashboard</h1>}
-        <div className="bars">
-          <FontAwesomeIcon
-            onClick={onToggleHangler}
-            icon={show ? faXmark : faBars}
-          />
-        </div>
-      </div>
-      {menuItem.map((item, index) => (
-        <Link to={item.path} key={index} className="link">
-          <div className="icon">
-            <FontAwesomeIcon icon={item.icon} />
+      <div className="container">
+        <div style={{ width: show ? "28%" : "7%" }} className="sidebar">
+          <div className="top_section">
+            {show && <h1 className="logo">Admin Dashboard</h1>}
+            <div className="bars">
+              <FontAwesomeIcon
+                onClick={onToggleHangler}
+                icon={show ? faXmark : faBars}
+              />
+            </div>
           </div>
-          {show && <div className="link_text">{item.name}</div>}
-        </Link>
-      ))}
-    </div>
-    <main><Outlet /></main>
+          {menuItem.map((item, index) => (
+            <Link to={item.path} key={index} className="link">
+              <div className="iconTextLink">
+                <div className={show ? "Adminicon" : "AdminIconClose"}>
+                  <FontAwesomeIcon icon={item.icon} />
+                </div>
+                {show && <div className="link_text">{item.name}</div>}
+              </div>
+            </Link>
+            
+          ))}
+        </div>
+        <main>
+          <Outlet />
+        </main>
       </div>
-      
     </>
-
   );
 };
 

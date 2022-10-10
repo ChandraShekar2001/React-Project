@@ -8,11 +8,13 @@
 
 .container {
     display: flex;
+    position: absolute;
+    top: 10%;
 }
 
 main {
     width: 100%;
-    padding: 5px;
+    padding: 1%;
 }
 
 .sidebar {
@@ -20,31 +22,33 @@ main {
     background: rgb(87, 87, 87);
     height: 100vh;
     width: 28%;
+    top: 5%;
     transition: all 0.5s;
 }
 
 .top_section {
     display: flex;
     align-items: center;
-    padding: 20px 45px;
+    padding: 10% 10%;
+    
 }
 
 .logo {
-    font-size: 30px;
+    font-size:150%;
     margin-right: 15px;
     color:#efefef;
 }
 
 .bars {
     display: flex;
-    font-size: 30px;
+    font-size:200%;
+    margin-left: 10%;
 }
 
 .link {
-    display: flex;
     color: #fff;
-    padding: 15px 40px;
-    gap: 15px;
+    padding: 5% 15%;
+    /* gap: 5%; */
     letter-spacing: 0.05em;
     transition: all 0.5s;
 }
@@ -55,15 +59,25 @@ main {
     transition: all 0.5s;
 }
 
+.iconTextLink{
+    display:flex;
+    flex-direction:row;
+    gap: 5%;
+}
+
 .active {
     background: lightskyblue;
     color: #000;
 }
 
-.icon, .link_text {
-    font-size: 20px;
+.Adminicon, .link_text {
+    font-size: 110%;
 }
 
 .bars :hover{
     cursor: pointer;
+}
+
+.AdminIconClose{
+    padding: 5% 15%
 }

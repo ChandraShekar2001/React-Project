@@ -16,7 +16,8 @@ const Navbar = () => {
   const onLogOutHandler = (e) => {
     e.preventDefault();
     alert.success("Logged out successfully!");
-    dispatch(logout()).then(() => {navigate('/login')})
+    dispatch(logout())
+    navigate('/login')
   };
   const [keyword, setKeyword] = useState("");
   const [isProfileTouched, setisProfileTouched] = useState(false);
@@ -44,7 +45,7 @@ const Navbar = () => {
           </button>
           {localStorage.getItem("role") &&
             localStorage.getItem("role") === "admin" && (
-              <button className={classes["dropdown-content"]} ><Link style={{margin: '0', padding: '0'}} to='admin/dashboard'>Dashboard</Link></button>
+              <button className={classes["dropdown-content"]} ><Link style={{margin: '0', padding: '0'}} to='/admin/dashboard'>Dashboard</Link></button>
             )}
         </div>
 
@@ -77,7 +78,7 @@ const Navbar = () => {
           </li>
           <li className={classes.item}>
             <Link >
-              <FontAwesomeIcon icon={faUser} className={classes.black} onClick = {e => setisProfileTouched(!isProfileTouched)} />{" "}
+              <FontAwesomeIcon icon={faUser} className={classes.black} onClick = {() => setisProfileTouched(!isProfileTouched)} />{" "}
             </Link>
           </li>
         </ul>

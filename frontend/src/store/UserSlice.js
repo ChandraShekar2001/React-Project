@@ -83,7 +83,7 @@ const userSlice = createSlice({
             state.error = action.payload
         },
 
-        logoutSuccess(state, action) {
+        logoutSuccess(state) {
             state.loading = false;
             state.user = null;
             state.isAuthenticated = false;
@@ -113,7 +113,8 @@ const userSlice = createSlice({
         },
 
         clearErrors(state) {
-            state.loading = null;
+            state.loading = true;
+            state.error = null;
         }
 
 

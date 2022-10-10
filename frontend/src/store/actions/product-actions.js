@@ -78,6 +78,7 @@ export const getAdminProduct = () => async (dispatch) => {
       }
     );
     const data = await response.json();
+    console.log(data);
     dispatch(adminProductActions.adminProductRequestSuccess(data.products));
   } catch (error) {
     dispatch(
@@ -131,8 +132,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch(deleteProductActions.deleteProductRequest());
-
-    const response = await fetch(`/api/v1/admin/product/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/v1/admin/product/${id}`, {
       method: 'DELETE',
       headers: { "Content-Type": "application/json", token},
     });

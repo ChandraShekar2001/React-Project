@@ -31,7 +31,6 @@ import UsersList from "../src/pages/UsersList";
 import UpdateUser from "../src/pages/UpdateUser";
 import ProductReviews from "../src/pages/ProductReviews";
 
-import IllegalAccess from "../src/components/Auth/IllegalAccess";
 
 import { loadUser } from "../src/store/actions/user-actions";
 import OrderSuccess from "./pages/OrderSuccess";
@@ -46,7 +45,7 @@ function App() {
 
   // eslint-disable-next-line
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  // console.log(user);
+  console.log(user);
   return (
     <>
       <Navbar />
@@ -74,7 +73,7 @@ function App() {
             localStorage.getItem("token") ? (
               isAuthenticated && <Profile />
             ) : (
-              <IllegalAccess />
+              <Navigate to="/login" />
             )
           }
         />

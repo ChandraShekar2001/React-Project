@@ -75,7 +75,7 @@ function Cart() {
             </div>
           </div>
           <div className={classes["checkout"]}>
-            <Button variant="dark" onClick={checkoutHandler }>Checkout</Button>
+            <Button variant="dark" onClick={checkoutHandler} {...cartItems ?'disabled': ''}>Checkout</Button>
           </div>
         </div>
 
