@@ -3,10 +3,8 @@ import Home from "./pages/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import AdminSideBar from "../src/components/layout/AdminSideBar";
 import Navbar from '../src/components/Navbar/Navbar'
-
 import Products from "../src/pages/Products";
 import Auth from "../src/pages/Auth";
 import Profile from "../src/pages/Profile";
@@ -30,7 +28,6 @@ import OrderList from "../src/pages/OrderList";
 import UsersList from "../src/pages/UsersList";
 import UpdateUser from "../src/pages/UpdateUser";
 import ProductReviews from "../src/pages/ProductReviews";
-
 
 import { loadUser } from "../src/store/actions/user-actions";
 import OrderSuccess from "./pages/OrderSuccess";
