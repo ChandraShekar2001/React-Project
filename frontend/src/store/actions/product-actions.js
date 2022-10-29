@@ -90,9 +90,9 @@ export const getAdminProduct = () => async (dispatch) => {
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch(craeteProductActions.newProductRequest());
-
+    console.log(productData);
     const response = await fetch(
-      `http://localhost:4000//api/v1/admin/product/new`,
+      `http://localhost:4000/api/v1/admin/product/new`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json", token },
@@ -100,6 +100,7 @@ export const createProduct = (productData) => async (dispatch) => {
       }
     );
     const data = await response.json();
+    console.log(data);
     dispatch(craeteProductActions.newProductRequestSuccess(data));
   } catch (error) {
     dispatch(

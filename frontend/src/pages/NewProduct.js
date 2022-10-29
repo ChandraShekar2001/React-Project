@@ -1,33 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "../components/styles/AdminCreateProduct.css";
-// import { arrAction } from "../store/reducers/productArr-slice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createProduct } from "../store/actions/product-actions";
+import {useNavigate} from 'react-router-dom'
 
 const AdminCreateProduct = () => {
-  //   const dispatch = useDispatch();
-  const show = useSelector((state) => state.FormShow.show);
-  //   const [data, setData] = useState({
-  //     productName: "",
-  //     price: "",
-  //     productDiscription: "",
-  //     item: "",
-  //     stock: "",
-  //   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //   const onChangeInputHandler = (e) => {
-  //     setData({ ...setData, [e.target.id]: e.target.value });
-  //   };
+  const show = useSelector((state) => state.FormShow.show);
+
+
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [Stock, setStock] = useState('');
+
+
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // dispatch(arrAction.AddDataToArr(data));
-    // setData({
-    //   productName: "",
-    //   price: "",
-    //   productDiscription: "",
-    //   item: "",
-    //   stock: "",
-    // });
+    const productData = {
+      name,
+      description,
+      price,
+      category,
+      Stock,
+    }
+    dispatch(createProduct(productData));
+    
+    setName('')
+    setPrice('')
+    setCategory('')
+    setDescription('')
+    setStock('')
+    
+    navigate("/admin/products")
   };
 
   return (
@@ -43,60 +52,57 @@ const AdminCreateProduct = () => {
             </div>
             <div className="divInput">
               <input
-                // onChange={onChangeInputHandler}
+                onChange={(e)=>setName(e.target.value)}
                 type="text"
                 placeholder="Product Name"
                 className="inputField"
                 id="name"
-                // value={data.productName}
+                value={name}
               />
             </div>
             <div className="divInput">
               <input
-                // onChange={onChangeInputHandler}
+                onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 placeholder="Price"
                 className="inputField"
                 id="price"
-                // value={data.price}
+                value={price}
               />
             </div>
             <div className="divInput">
               <input
-                // onChange={onChangeInputHandler}
+                onChange={e => setDescription(e.target.value)}
                 type="text"
                 placeholder="Product Discription"
                 className="inputField"
                 id="description"
-                // value={data.productDiscription}
+                value={description}
               />
             </div>
             <div className="divInput">
               <input
-                // onChange={onChangeInputHandler}
+                onChange={e => setCategory(e.target.value)}
                 type="text"
                 placeholder="Category"
                 className="inputField"
                 id="category"
-                // value={data.productDiscription}
+                value={category}
               />
-
-
             </div>
             <div className="divInput">
-
-            <input
-              // onChange={onChangeInputHandler}
-              type="number"
-              placeholder="Stock"
-              className="inputField"
-              id="stock"
-              // value={data.stock}
-            />
+              <input
+                onChange={e => setStock(e.target.value)}
+                type="number"
+                placeholder="Stock"
+                className="inputField"
+                id="stock"
+                value={Stock}
+              />
             </div>
             <button type="submit" className="createButton">
-            CREATE
-          </button>
+              CREATE
+            </button>
           </div>
         </form>
       </div>
