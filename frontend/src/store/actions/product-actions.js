@@ -148,7 +148,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const newReview = (reviewData) => async (dispatch) => {
   try {
     dispatch(newReviewActions.newReviewRequest());
-
+    console.log(reviewData);
     const response = await fetch(`http://localhost:4000/api/v1/review`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", token },

@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactStars from "react-rating-stars-component";
 import {faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 
-function IndividualReview() {
+function IndividualReview({comment, stars, userName}) {
 
     const rating = {
         size: 20,
         count: 5,
         color: "grey",
         activeColor: "orange",
-        value: 2.5,
+        value: stars,
         a11y: true,
         isHalf: true,
         emptyIcon: <FontAwesomeIcon icon={faStar} />,
@@ -28,7 +28,7 @@ function IndividualReview() {
                     </div>
                     <div className={`${classes['col-3']} ${classes["user-name-review-time"]}`}>
                         <div className={classes["user-name"]}>
-                            User name
+                            {userName}
                         </div>
                         <div className={classes["review-time"]}>
                             date time
@@ -57,7 +57,7 @@ function IndividualReview() {
                 </div>
                 <div className={`${classes['row']} ${classes["user-review"]}`}>
                     <div className={classes["user-review-txt"]}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, error?
+                       {comment}
                     </div>
                 </div>
             </div>

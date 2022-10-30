@@ -172,7 +172,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     rating: Number(rating),
     comment,
   };
-
+  // console.log(review);
   const product = await Product.findById(productId);
 
   const isReviewed = product.reviews.find(
@@ -196,7 +196,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   });
 
   product.ratings = avg / product.reviews.length;
-
+  // console.log(product);
   await product.save({ validateBeforeSave: false });
 
   res.status(200).json({
