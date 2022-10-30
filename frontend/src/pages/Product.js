@@ -4,6 +4,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAlert } from "react-alert";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+
 import {
   faStar,
   faIndianRupeeSign,
@@ -70,8 +73,12 @@ function Product() {
   const [state3, setState3] = useState(false);
   const [state4, setState4] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [Rating, setRating] = useState(0);
+  const [Rating, setRating] = useState("");
   const [comment, setComment] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const clickHandler1 = () => {
     setState1(true);
@@ -122,7 +129,7 @@ function Product() {
       comment,
       productId: params.id,
     };
-
+    console.log(reviewData);
     dispatch(newReview(reviewData));
   };
 
@@ -396,7 +403,7 @@ function Product() {
               </div>
             </div>
             <div>
-              <form onSubmit={onReviewFormSubmitHandler}>
+              {/* <form onSubmit={onReviewFormSubmitHandler}>
                 <input
                   type="text"
                   value={Rating}
@@ -416,10 +423,60 @@ function Product() {
                   Cancel
                 </button>
                 <button>Submit</button>
-              </form>
+              </form> */}
+              
+        
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>New Review</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form id="reviewform" onSubmit={onReviewFormSubmitHandler}>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                      <Form.Label>Rating</Form.Label>
+                      <Form.Control
+                        type="text"
+                        autoFocus
+                        value={Rating}
+                        onChange={(e) => setRating(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlTextarea1"
+                    >
+                      <Form.Label>Review</Form.Label>
+                      <Form.Control as="textarea" rows={3} 
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={(e) => {
+                    setShow(false);
+                    setRating("");
+                    setComment("");
+                  }
+                  }>
+                    Close
+                  </Button>
+                  <Button variant="dark" form="reviewform" type="submit" onClick={(e) => {
+                    setShow(false);
+                  }}>
+                    Submit Review
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
             <div className={`${classes["product-reviews-all"]}`}>
-              <div className={classes["main-heading"]}>Reviews</div>
+              <div className={classes["main-heading"]}>
+                Reviews
+                <Button variant="secondary" onClick={handleShow}>
+                  New Rating
+                </Button>
+              </div>
               {product.reviews.map((review) => (
                 <IndividualReview
                   comment={review.comment}

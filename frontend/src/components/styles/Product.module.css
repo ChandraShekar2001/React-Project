@@ -548,6 +548,8 @@ a:hover {
 
 .product-reviews-all .main-heading {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     height: 4rem;
     width: 100%;
