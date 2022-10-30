@@ -29,13 +29,11 @@ const AdminCreateProduct = () => {
       Stock,
     }
     dispatch(createProduct(productData));
-    
     setName('')
     setPrice('')
     setCategory('')
     setDescription('')
     setStock('')
-    
     navigate("/admin/products")
   };
 
