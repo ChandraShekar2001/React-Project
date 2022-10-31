@@ -38,7 +38,7 @@ const UpdateProfile = () => {
         <Navbar />
         <div className={classes.complete}>
         <div className={classes["complete-form"]}>
-          <h4 style={{ textAlign: "center", marginTop: "10px" }}>UPDATE PROFILE</h4>
+          <div style={{ textAlign: "center", marginTop: "10px", fontSize: "28px" }}>UPDATE PROFILE</div>
           <form className={classes.loginForm} onSubmit={onSubmitHandler}>
             <div className={classes.formInputs}>
               <input

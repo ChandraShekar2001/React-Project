@@ -59,7 +59,7 @@ const Login = (props) => {
 
       <div className={classes.complete}>
         <div className={classes["complete-form"]}>
-          <h4 style={{ textAlign: "center", marginTop: "10px" }}>LOGIN</h4>
+          <div style={{ textAlign: "center", marginTop: "10px", fontSize: "28px"}}>LOGIN</div>
           <form className={classes.loginForm} onSubmit={onSubmitHandler}>
             <div className={classes.formInputs}>
               <input
@@ -83,7 +83,7 @@ const Login = (props) => {
                 className={classes.input}
               />
             </div>
-            <Link to="/password/forgot">Forgot Password?</Link>
+            <Link to="/password/forgot" style={{color: 'blue' }}>Forgot Password?</Link>
             <button className={classes.Btn}>Submit</button>
             <button className={classes.Btn} onClick={showSignUpHandler}>
               Sign Up

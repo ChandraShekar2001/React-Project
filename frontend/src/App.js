@@ -58,7 +58,11 @@ function App() {
             )
           }
         />
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={ localStorage.getItem("token") ? (
+          <Home />
+        ) : (
+          <Navigate to="/login" />
+        )} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/product/:id" element={<Product />} />

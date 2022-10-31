@@ -61,9 +61,9 @@ const UpdatePassword = () => {
       <Navbar />
       <div className={classes.complete}>
         <div className={classes["complete-form"]}>
-          <h4 style={{ textAlign: "center", marginTop: "10px" }}>
-            UPDATE PASSWORD
-          </h4>
+          <div style={{ textAlign: "center", marginTop: "10px", fontSize:"25px" }}>
+            CHANGE PASSWORD
+          </div>
           <form className={classes.loginForm} onSubmit={onSubmitHandler}>
             <div className={classes.formInputs}>
               <input

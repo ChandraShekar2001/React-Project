@@ -44,7 +44,7 @@ const Payment = () => {
 
   return (
     <Fragment>
-      <CheckoutSteps activeStep={2} />
+    <div style={{marginTop:"5%", font: 'Poppins'}}><CheckoutSteps activeStep={2}/></div>
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>

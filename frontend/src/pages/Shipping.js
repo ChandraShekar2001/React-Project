@@ -36,11 +36,11 @@ const Shipping = () => {
 
   return (
     <>
-      
-    <CheckoutSteps activeStep={0} />
+      <div style={{marginTop:"5%", font: 'Poppins'}}><CheckoutSteps activeStep={0}/></div>
+     
 
       
-      <div className="shippingForm">
+      <div className="shippingForm" style={{marginTop:"5%"}}>
         <form className="productForm" onSubmit={shippingSubmit}>
           <div className="createShippingForm">
             <div

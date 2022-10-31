@@ -55,7 +55,7 @@ const SignUp = () => {
       <Navbar />
       <div className={classes.complete}>
         <div className={classes["complete-form"]}>
-          <h4 style={{ textAlign: "center", marginTop: "10px" }}>SIGN UP</h4>
+          <div style={{ textAlign: "center", marginTop: "10px", fontSize: "28px" }}>SIGN UP</div>
           <form className={classes.singUpForm} onSubmit={onSubmitHandler}>
             <div className={classes.formInputs}>
               <input

@@ -38,7 +38,7 @@ const OrderConfirm = () => {
 
   return (
     <>
-      <CheckoutSteps activeStep={1} />
+    <div style={{marginTop:"5%", font: 'Poppins'}}><CheckoutSteps activeStep={1}/></div>
       <div className="confirmOrderPage">
         <div>
           <div className="confirmshippingArea">
