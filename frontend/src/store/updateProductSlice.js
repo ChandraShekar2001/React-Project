@@ -8,7 +8,7 @@ const updateProductSlice = createSlice({
     error: null,
   },
   reducers: {
-    updateProductRequst(state) {
+    updateProductRequest(state) {
       state.loading = true;
     },
     updateProductSuccess(state, action) {

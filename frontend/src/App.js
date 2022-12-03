@@ -33,6 +33,8 @@ import { loadUser } from "../src/store/actions/user-actions";
 import OrderSuccess from "./pages/OrderSuccess";
 import OrderDetail from "./pages/OrderDetail";
 
+// import Loading from './components/layout/Loading'
+
 function App() {
   const dispatch = useDispatch();
 
@@ -112,6 +114,7 @@ function App() {
         <Route exact path="/login" element={<Auth />} />
         <Route exact path="/orders" element={<Orders />} />
         <Route exact path="/order/:id" element={<OrderDetail />} />
+        {/* <Route exact path="/loader" element={ <Loading />} /> */}
 
         <Route exact path="/admin/*" element={<AdminSideBar />}>
           <Route index={true} exact path="dashboard" element={<Dashboard />} />
@@ -143,8 +146,8 @@ function App() {
 
           <Route
             exact
-            index={true}
             path="user/:id"
+            index={true}
             element={<UpdateUser />}
           />
 

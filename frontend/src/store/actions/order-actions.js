@@ -45,7 +45,6 @@ export const myOrders = () => async (dispatch) => {
 
 // Get All Orders (admin)
 export const getAllOrders = () => async (dispatch) => {
-  try {
     dispatch(allOrderActions.allOrdersRequest());
 
     const response = await fetch("http://localhost:4000/api/v1/admin/orders", {
@@ -58,35 +57,29 @@ export const getAllOrders = () => async (dispatch) => {
     const data = await response.json();
     // console.log(data);
     dispatch(allOrderActions.allOrdersSuccess(data.orders));
-  } catch (error) {
-    dispatch(allOrderActions.allOrdersFail(error.response.data.message));
-  }
+
 };
 
 // Update Order
 export const updateOrder = (id, order) => async (dispatch) => {
-  try {
     dispatch(updateOrderActions.updateOrderRequest());
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = fetch(`/api/v1/admin/order/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/v1/admin/order/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         token,
       },
-      body: order,
-      config,
+      body: JSON.stringify(order),
     });
 
+    const data = await response.json()
+    console.log(data);
+    if(data.success)
     dispatch(updateOrderActions.updateOrderSuccess(data.success));
-  } catch (error) {
-    dispatch(updateOrderActions.updateOrderfail(error.response.data.message));
-  }
+    else dispatch(updateOrderActions.updateOrderfail(data.message));
+
+  
 };
 
 // Delete Order
@@ -94,8 +87,8 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch(deleteOrderActions.deleteOrderRequest());
 
-    const { data } = await fetch(`/api/v1/admin/order/${id}`, {
-      method: "DELETE",
+    const { data } = await fetch(`http://localhost:4000/api/v1/admin/order/${id}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         token,

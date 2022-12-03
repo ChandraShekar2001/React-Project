@@ -21,7 +21,7 @@ const AdminReviews = () => {
     dispatch(getAllReviews(id))
   }
 
-  const {loading, reviews} = useSelector(state => state.allReview)
+  const {reviews} = useSelector(state => state.allReview)
 
   return (
     <div>
@@ -38,7 +38,7 @@ const AdminReviews = () => {
               value= {id}
               
             />
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" onClick = {onSubmitHandler} />
+            <FontAwesomeIcon style={{marginTop:"-0.65%"}} icon={faMagnifyingGlass} className="searchIcon" onClick = {onSubmitHandler} />
             {/* <button className="buttonReview">SEARCH</button> */}
           </form>
         </div>

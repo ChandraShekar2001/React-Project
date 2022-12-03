@@ -39,7 +39,7 @@ const AdminCreateProduct = () => {
 
   return (
     <>
-      <div className="completeForm" style={{ left: show ? "44%" : "37%" }}>
+      <div className="completeForm" style={{ left: show ? "52%" : "37%" }}>
         <form className="productForm" onSubmit={onSubmitHandler}>
           <div className="createProductForm">
             <div

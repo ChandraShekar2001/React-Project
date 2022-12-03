@@ -64,9 +64,9 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 // get all Orders -- Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
   const orders = await Order.find();
-
+ 
   let totalAmount = 0;
-
+ 
   orders.forEach((order) => {
     totalAmount += order.totalPrice;
   });
@@ -92,7 +92,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
 
   if (req.body.status === "Shipped") {
     order.orderItems.forEach(async (o) => {
-      await updateStock(o.product, o.quantity);
+      await updateStock(o.id, o.quantity);
     });
   }
   order.orderStatus = req.body.status;
@@ -110,6 +110,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
+  console.log(product);
   product.Stock -= quantity;
 
   await product.save({ validateBeforeSave: false });

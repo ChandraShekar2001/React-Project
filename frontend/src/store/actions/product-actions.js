@@ -78,7 +78,7 @@ export const getAdminProduct = () => async (dispatch) => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     dispatch(adminProductActions.adminProductRequestSuccess(data.products));
   } catch (error) {
     dispatch(
@@ -110,11 +110,12 @@ export const createProduct = (productData) => async (dispatch) => {
 };
 
 export const updateProduct = (id, productData) => async (dispatch) => {
-  try {
-    dispatch(updateProductActions.updateProductRequst());
+  console.log(id, productData);
+   
+    dispatch(updateProductActions.updateProductRequest());
 
     const response = await fetch(
-      `http://localhost:4000//api/v1/admin/product/${id}`,
+      `http://localhost:4000/api/v1/admin/product/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json", token },
@@ -122,24 +123,29 @@ export const updateProduct = (id, productData) => async (dispatch) => {
       }
     );
     const data = await response.json();
+    console.log(data);
+    if(data.success)
     dispatch(updateProductActions.updateProductSuccess(data.success));
-  } catch (error) {
-    dispatch(
-      updateProductActions.updateProductFail(error.response.data.message)
-    );
-  }
+    else updateProductActions.updateProductFail(data.message)
+
+  
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
+  console.log(id);
   try {
     dispatch(deleteProductActions.deleteProductRequest());
     const response = await fetch(`http://localhost:4000/api/v1/admin/product/${id}`, {
-      method: 'DELETE',
+      method: 'POST',
       headers: { "Content-Type": "application/json", token},
     });
 
     const data = await response.json();
+    console.log(data);
+    if(data.success)
     dispatch(deleteProductActions.deleteProductRequestSucess(data.success));
+    else     dispatch(deleteProductActions.deleteProductRequestFail(data.message))
+
   } catch (error) {
     dispatch(deleteProductActions.deleteProductRequestFail(error.response.data.message))
   }

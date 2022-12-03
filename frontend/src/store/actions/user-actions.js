@@ -42,6 +42,7 @@ export const register = (userData) => async (dispatch) => {
     const data = await response.json();
     localStorage.setItem("token", data.token);
     dispatch(UserActions.registerUserSuccess(data.user));
+    console.log(data);
   } catch (error) {
     dispatch(UserActions.registerUserFail(error.response.data.message));
   }
@@ -226,7 +227,7 @@ export const deleteUser = (id) => async (dispatch) => {
     const response = await fetch(
       `http://localhost:4000/api/v1/admin/user/${id}`,
       {
-        method: "DELETE",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           token,
@@ -234,6 +235,7 @@ export const deleteUser = (id) => async (dispatch) => {
       }
     );
     const data = await response.json();
+    console.log(data);
     dispatch(deleteUserActions.deleteUserSuccess(data));
   } catch (error) {
     dispatch(deleteUserActions.deleteUserFail(error.response.data.message));

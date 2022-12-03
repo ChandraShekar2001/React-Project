@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.4",
@@ -25,6 +26,8 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",
+    "react-loader-spinner": "^5.3.4",
+    "react-loading": "^2.0.3",
     "react-material-ui-carousel": "^3.4.2",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.0.4",
@@ -33,6 +36,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "reactjs-popup": "^2.0.5",
+    "recharts": "^2.1.16",
     "simple-react-footer": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
