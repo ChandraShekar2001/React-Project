@@ -32,11 +32,13 @@ import ProductReviews from "../src/pages/ProductReviews";
 import { loadUser } from "../src/store/actions/user-actions";
 import OrderSuccess from "./pages/OrderSuccess";
 import OrderDetail from "./pages/OrderDetail";
+import {useAlert} from 'react-alert'
 
 // import Loading from './components/layout/Loading'
 
 function App() {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   useEffect(() => {
     if (localStorage.getItem("token")) dispatch(loadUser());
@@ -112,9 +114,14 @@ function App() {
         <Route exact path="/order/confirm" element={<OrderConfirm />} />
         <Route exact path="/shipping" element={<Shipping />} />
         <Route exact path="/login" element={<Auth />} />
-        <Route exact path="/orders" element={<Orders />} />
+        <Route exact path="/orders" element={
+            localStorage.getItem("token") ? (
+              <Orders />
+            ) : (
+              <Navigate to="/login" /> 
+            )
+          } />
         <Route exact path="/order/:id" element={<OrderDetail />} />
-        {/* <Route exact path="/loader" element={ <Loading />} /> */}
 
         <Route exact path="/admin/*" element={<AdminSideBar />}>
           <Route index={true} exact path="dashboard" element={<Dashboard />} />

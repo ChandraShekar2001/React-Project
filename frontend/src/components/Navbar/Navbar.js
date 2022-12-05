@@ -6,7 +6,7 @@ import { faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
-import {logout} from '../../store/actions/user-actions'
+import { logout } from "../../store/actions/user-actions";
 
 const Navbar = () => {
   const alert = useAlert();
@@ -16,8 +16,8 @@ const Navbar = () => {
   const onLogOutHandler = (e) => {
     e.preventDefault();
     alert.success("Logged out successfully!");
-    dispatch(logout())
-    navigate('/login')
+    dispatch(logout());
+    navigate("/login");
   };
   const [keyword, setKeyword] = useState("");
   const [isProfileTouched, setisProfileTouched] = useState(false);
@@ -45,7 +45,14 @@ const Navbar = () => {
           </button>
           {localStorage.getItem("role") &&
             localStorage.getItem("role") === "admin" && (
-              <button className={classes["dropdown-content"]} ><Link style={{margin: '0', padding: '0'}} to='/admin/dashboard'>Dashboard</Link></button>
+              <button className={classes["dropdown-content"]}>
+                <Link
+                  style={{ margin: "0", padding: "0" }}
+                  to="/admin/dashboard"
+                >
+                  Dashboard
+                </Link>
+              </button>
             )}
         </div>
 
@@ -72,34 +79,65 @@ const Navbar = () => {
             </Link>
           </li>
           <li className={classes.item}>
-            <Link to = '/cart'>
+            <Link to="/cart">
               <FontAwesomeIcon icon={faCartPlus} className={classes.black} />{" "}
             </Link>
           </li>
           <li className={classes.item}>
-            <Link >
-              <FontAwesomeIcon icon={faUser} className={classes.black} onClick = {() => setisProfileTouched(!isProfileTouched)} />{" "}
+            <Link>
+              <FontAwesomeIcon
+                icon={faUser}
+                className={classes.black}
+                onClick={() => setisProfileTouched(!isProfileTouched)}
+              />{" "}
             </Link>
           </li>
         </ul>
       </nav>
-      {isProfileTouched && <div className={classes.toggleBox}>
-        <ul>
-          <li>
-            <Link  onClick={onLogOutHandler}>
-              Log out
-            </Link>
-          </li>
-          <li>
-            {" "}
-            <Link to="/account">Account</Link>
-          </li>
-          <li>
-            {" "}
-            <Link to="/orders">Orders</Link>
-          </li>
-        </ul>
-      </div>}
+      {isProfileTouched && (
+        <div className={classes.toggleBox}>
+          <ul
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              backgroundColor: "#efefef",
+              borderRadius: "10px",
+              // marginLeft:'0'
+            }}
+          >
+            <li style={{ width: "100%", marginRight:'15%', textAlign:'center' }} className={classes.tag}>
+              <Link
+                onClick={onLogOutHandler}
+                style={{ color: "black", marginRight: "15px" }}
+              >
+                Log out
+              </Link>
+            </li>
+            <li style={{ width: "100%", marginRight:'15%', textAlign:'center' }} className={classes.tag}>
+              {" "}
+              <Link
+                to="/account"
+                style={{ color: "black", marginRight: "15px" }}
+              >
+                Account
+              </Link>
+            </li>
+            <li style={{ width: "100%", marginRight:'15%', textAlign:'center' }} className={classes.tag}>
+              {" "}
+              <Link
+                to="/orders"
+                style={{ color: "black", marginRight: "15px" }}
+              >
+                Orders
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };
